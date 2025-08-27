@@ -1,102 +1,247 @@
-# MarmiChef - Application de Recettes
+# 🍽️ Marmiton-Like
 
-Une application mobile moderne de recettes de cuisine construite avec Expo et React Native.
+Une application mobile de recettes inspirée de Marmiton, développée avec **Expo Router** et **React Native**.
 
-## 🏗️ Architecture Simplifiée et Maintenable
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![React Native](https://img.shields.io/badge/React%20Native-0.79.6-blue.svg)
+![Expo](https://img.shields.io/badge/Expo-~53.0.22-black.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-~5.8.3-blue.svg)
 
-Cette version optimisée du code privilégie la simplicité et la maintenabilité pour les équipes de développement.
+## 📱 Aperçu
 
-### Structure du Projet
+Marmiton-Like est une application moderne de recettes de cuisine qui offre une expérience utilisateur intuitive avec un design adaptatif (mode clair/sombre) et une navigation fluide. L'application permet de découvrir, rechercher et sauvegarder vos recettes préférées.
+
+### ✨ Fonctionnalités principales
+
+- 🏠 **Page d'accueil** : Découverte de recettes populaires et recommandations
+- 🔍 **Recherche avancée** : Filtrage par nom, ingrédients, type de plat
+- ❤️ **Favoris** : Sauvegarde de vos recettes préférées
+- 📱 **Design adaptatif** : Interface qui s'adapte au thème système (clair/sombre)
+- 🎨 **Navigation intuitive** : Onglets avec icônes et navigation par pile
+- 🚀 **Performance optimisée** : Architecture clean et composants réutilisables
+
+## 🏗️ Architecture
+
+L'application utilise une architecture moderne basée sur :
+
+### 📁 Structure du projet
 
 ```
-📁 app/                     # Navigation Expo Router
-  📁 (tabs)/               # Onglets principaux
-  📁 recipes/              # Pages de détail des recettes
-📁 components/             # Composants réutilisables
-📁 hooks/                  # Hooks personnalisés
-📁 services/              # Services (stockage, API)
-📁 types/                 # Types TypeScript centralisés
-📁 constants/             # Constantes (thèmes, couleurs)
-📁 data/                  # Données statiques
+marmiton-like/
+├── app/                    # Pages et navigation (Expo Router)
+│   ├── (tabs)/            # Navigation par onglets
+│   │   ├── index.tsx      # Page d'accueil
+│   │   ├── search.tsx     # Page de recherche
+│   │   ├── favorites.tsx  # Page des favoris
+│   │   └── _layout.tsx    # Layout des onglets
+│   ├── recipes/           # Pages de recettes
+│   │   └── [id].tsx       # Détail d'une recette
+│   └── _layout.tsx        # Layout racine
+├── components/            # Composants réutilisables
+│   ├── RecipeCard.tsx     # Carte de recette
+│   ├── SearchBar.tsx      # Barre de recherche
+│   ├── Screen.tsx         # Conteneur d'écran
+│   └── SectionTitle.tsx   # Titre de section
+├── hooks/                 # Hooks personnalisés
+│   ├── useTheme.tsx       # Gestion du thème
+│   └── useFavorites.ts    # Gestion des favoris
+├── services/              # Services et logique métier
+│   └── storage.ts         # Service de stockage
+├── constants/             # Constantes et configuration
+│   └── Colors.ts          # Palette de couleurs
+├── data/                  # Données statiques
+│   └── recipes.ts         # Base de données des recettes
+└── types/                 # Types TypeScript
+    └── recipe.ts          # Types pour les recettes
 ```
 
-### Principaux Composants
+### 🎨 Système de thème
 
-#### 🎨 Système de Thème (`hooks/useTheme.ts`)
-- **Simplicité** : Detection automatique du thème système
-- **Performance** : Context optimisé avec types stricts
-- **Maintenabilité** : Couleurs centralisées dans `constants/theme.ts`
+L'application utilise un système de thème adaptatif qui détecte automatiquement les préférences système :
 
-#### 💾 Gestion du Stockage (`services/storage.ts`)
-- **Fallback automatique** : Mémoire si AsyncStorage indisponible
-- **Interface unifiée** : Même API pour tous les types de stockage
-- **Gestion d'erreurs** : Logs sans interruption de l'app
+- **Mode clair** : Interface lumineuse avec des couleurs chaudes
+- **Mode sombre** : Interface sombre pour une utilisation confortable en basse luminosité
+- **Transition automatique** : Basculement selon les paramètres du système
 
-#### ⭐ Favoris (`hooks/useFavorites.ts`)
-- **Performance** : Utilise Set pour O(1) lookup
-- **Persistance** : Sauvegarde automatique des changements
-- **Simplicité** : Hook unique pour toute la logique
+### 🗂️ Gestion des données
 
-## 📋 Types Centralisés
+- **Recettes** : Base de données locale avec recettes variées
+- **Favoris** : Système de persistance local avec fallback en mémoire
+- **Recherche** : Filtrage en temps réel par nom et ingrédients
 
-Tous les types sont définis dans `types/recipe.ts` pour une meilleure cohérence.
+## 🚀 Installation et démarrage
 
-## 🚀 Avantages de cette Architecture
+### Prérequis
 
-### ✅ Pour les Développeurs
-- **Code prévisible** : Patterns cohérents partout
-- **Debugging facile** : Services isolés et testables
-- **Tests simples** : Hooks découplés de l'UI
-- **Réutilisabilité** : Composants modulaires
+- Node.js (≥ 18.0.0)
+- npm ou yarn
+- Expo CLI
+- Un émulateur iOS/Android ou l'app Expo Go
 
-### ✅ Pour la Maintenance
-- **Évolutivité** : Ajout facile de nouvelles fonctionnalités
-- **Refactoring sûr** : Types stricts TypeScript
-- **Performance** : Optimisations intégrées (memo, useMemo)
-- **Documentation** : Code auto-documenté avec JSDoc
+### Installation
 
-### Fonctionnalités
-- Liste de recettes populaires
-- Recherche par titre (filtrage local)
-- Détails d'une recette (ingrédients + étapes)
-- Gestion des favoris (contexte React)
-- Navigation par onglets + pile (Expo Router)
-- Typage TypeScript strict
-- Composants réutilisables (`RecipeCard`, `Screen`)
+1. **Cloner le projet**
+   ```bash
+   git clone https://github.com/lcarole/marmiton-like.git
+   cd marmiton-like
+   ```
 
-### Structure principale
-```
-app/
-  _layout.tsx              # Layout racine (Stack)
-  (tabs)/_layout.tsx       # Layout des onglets
-  (tabs)/index.tsx         # Accueil
-  (tabs)/search.tsx        # Recherche
-  (tabs)/favorites.tsx     # Favoris
-  recipes/[id].tsx         # Détail recette
-components/
-  FavoritesContext.tsx
-  RecipeCard.tsx
-  Screen.tsx
-data/
-  recipes.ts               # Données factices
-```
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
 
-### Installation & Lancement
+3. **Lancer l'application**
+   ```bash
+   npm start
+   ```
+
+### 📱 Lancement sur différentes plateformes
+
 ```bash
-npm install
-npm run start
+# Développement web
+npm run web
+
+# Émulateur iOS
+npm run ios
+
+# Émulateur Android
+npm run android
+
+# Avec Expo Go
+npm start
+# Puis scanner le QR code avec l'app Expo Go
 ```
-Ouvrir ensuite sur iOS / Android / Web via l'interface Expo.
 
-### Captures
-Les captures iOS se trouvent dans `screenshots/`.
+## 🛠️ Technologies utilisées
 
-### Améliorations potentielles
-- Persistance des favoris (AsyncStorage)
-- Ajout d'images pour chaque recette
-- Filtrage avancé (difficulté, durée)
-- Tests unitaires (Jest + Testing Library) pour le contexte et les écrans
-- Internationalisation (i18n)
+### Framework et Runtime
+- **React Native 0.79.6** - Framework de développement mobile
+- **Expo ~53.0.22** - Plateforme de développement
+- **Expo Router ~5.1.5** - Navigation basée sur le système de fichiers
+- **TypeScript ~5.8.3** - Typage statique
 
-### Licence
-Usage éducatif / démo.
+### UI et Thème
+- **@expo/vector-icons** - Icônes vectorielles
+- **React Native Reanimated** - Animations fluides
+- **Système de thème personnalisé** - Support clair/sombre
+
+### Navigation
+- **Expo Router** - Navigation moderne avec file-system routing
+- **React Native Screens** - Optimisation des écrans
+- **React Native Safe Area Context** - Gestion des zones sécurisées
+
+## 📋 Fonctionnalités détaillées
+
+### 🏠 Page d'accueil
+- Affichage des recettes populaires
+- Recommandations personnalisées
+- Navigation rapide vers les détails
+- Interface responsive
+
+### 🔍 Recherche
+- Barre de recherche en temps réel
+- Filtrage par nom de recette
+- Filtrage par ingrédients
+- Résultats instantanés
+
+### ❤️ Favoris
+- Ajout/suppression de favoris
+- Persistance locale des données
+- Interface de gestion intuitive
+- Synchronisation automatique
+
+### 📖 Détail des recettes
+- Affichage complet des informations
+- Liste des ingrédients
+- Instructions étape par étape
+- Temps de préparation et cuisson
+
+## 🔧 Configuration
+
+### Thème personnalisé
+
+Les couleurs sont définies dans `constants/Colors.ts` :
+
+```typescript
+const Colors = {
+  light: {
+    primary: '#ff7a00',
+    background: '#ffffff',
+    text: '#1a1a1a',
+    // ...
+  },
+  dark: {
+    primary: '#ffb366',
+    background: '#121212',
+    text: '#ffffff',
+    // ...
+  }
+};
+```
+
+### Configuration Expo
+
+Le fichier `app.json` contient la configuration principale :
+- Bundle identifier : `com.example.marmichef`
+- Schéma d'URL : `marmitonlike://`
+- Support tablette activé
+- Architecture nouvelle activée
+
+## 🚀 Déploiement
+
+### Build de développement
+
+```bash
+# Build pour iOS
+expo build:ios
+
+# Build pour Android
+expo build:android
+```
+
+### Build de production avec EAS
+
+```bash
+# Configuration EAS
+npx eas build --platform all
+
+# Build pour store
+npx eas submit
+```
+
+## 🧪 Tests et débogage
+
+### Outils de développement
+
+- **Expo DevTools** - Débogage en temps réel
+- **React Developer Tools** - Inspection des composants
+- **TypeScript** - Vérification de types à la compilation
+
+### Hot Reload
+
+L'application supporte le hot reload pour un développement rapide :
+- Modifications instantanées des composants
+- Préservation de l'état lors des modifications
+- Rechargement automatique des assets
+
+## 📝 Contribution
+
+### Standards de code
+
+- **TypeScript strict** - Typage complet
+- **Composants fonctionnels** - Hooks uniquement
+- **Architecture modulaire** - Séparation des responsabilités
+- **Nommage cohérent** - Conventions React/TypeScript
+
+### Processus de contribution
+
+1. Fork du projet
+2. Création d'une branche feature
+3. Développement avec tests
+4. Pull request avec description détaillée
+
+
+## 👥 Auteurs
+
+- **Luigi Carole** - [@lcarole](https://github.com/lcarole)
